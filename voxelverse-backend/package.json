@@ -1,0 +1,14 @@
+{
+  "name": "voxelverse-backend",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.3",
+    "@nestjs/core": "^11.1.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
