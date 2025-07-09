@@ -15,4 +15,9 @@ export class AppController {
     const supply = await this.pixelAssetService.getTotalSupply();
     return `Total supply: ${supply}`;
   }
+
+  @Get('contract-info')
+  async getContractInfo(): Promise<string> {
+    return await this.pixelAssetService.getContractInfo();
+  }
 }

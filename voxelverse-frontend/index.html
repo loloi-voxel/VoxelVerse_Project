@@ -6,20 +6,54 @@
     body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f0f0f0; }
     h1 { color: #4CAF50; font-size: 2.5em; }
     #message { font-size: 1.5em; color: #333; padding: 10px; background-color: #fff; border-radius: 5px; display: inline-block; }
+
+
+  button { padding: 10px 20px; font-size: 1em; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  button:hover { background-color: #45a049; }
+  #info { font-size: 1.2em; color: #555; margin-top: 10px; }
+
+
   </style>
 </head>
 <body>
   <h1>Welcome to VoxelVerse</h1>
   <div id="message">Loading...</div>
+  
+
+
+
+  <button onclick="fetchInfo()">Show Contract Info</button>
+  <div id="info">Click to load info...</div>
   <script>
-    fetch('http://localhost:3000/total-supply')
+    function fetchInfo() {
+    fetch('http://localhost:3000/contract-info')
       .then(response => response.text())
       .then(data => {
-        document.getElementById('message').textContent = data;
+        document.getElementById('info').textContent = data;
       })
       .catch(error => {
-        document.getElementById('message').textContent = 'Error: ' + error.message;
+        document.getElementById('info').textContent = 'Error: ' + error.message;
       });
-  </script>
+  }
+
+  // Garde le fetch initial pour total-supply
+    fetch('http://localhost:3000/total-supply')
+     .then(response => response.text())
+      .then(data => {
+       document.getElementById('message').textContent = data;
+     })
+      .catch(error => {
+       document.getElementById('message').textContent = 'Error: ' + error.message;
+      });
+</script>
+  
+  
+  
+  
+  
+
+
+
+
 </body>
 </html>

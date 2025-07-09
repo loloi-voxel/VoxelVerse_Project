@@ -21,16 +21,23 @@ const ethers_1 = require("ethers");
 let PixelAssetService = class PixelAssetService {
     constructor() {
         this.provider = new ethers_1.ethers.JsonRpcProvider('https://polygon-amoy.g.alchemy.com/v2/ToS-yKnpawn1ORRbXbMYB');
-        this.contractAddress = '0x97Ff147bF0BfCA0B3d2EA1BB3A28c56fF53A95c5'; // Remplace par ton adresse
+        this.contractAddress = '0x97Ff147bF0BfCA0B3d2EA1BB3A28c56fF53A95c5'; // Remplace par ton adresse complète
         this.abi = [
             'function totalSupply() view returns (uint256)',
-        ]; // ABI simplifiée, à compléter
+            // Ajoute d'autres fonctions si présentes dans PixelAsset.sol
+        ];
         this.contract = new ethers_1.ethers.Contract(this.contractAddress, this.abi, this.provider);
     }
     getTotalSupply() {
         return __awaiter(this, void 0, void 0, function* () {
             const supply = yield this.contract.totalSupply();
             return Number(supply);
+        });
+    }
+    getContractInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const supply = yield this.contract.totalSupply();
+            return `Contract at ${this.contractAddress} has ${Number(supply)} tokens`;
         });
     }
 };

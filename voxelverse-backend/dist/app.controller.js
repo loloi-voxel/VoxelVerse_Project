@@ -34,6 +34,11 @@ let AppController = class AppController {
             return `Total supply: ${supply}`;
         });
     }
+    getContractInfo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.pixelAssetService.getContractInfo();
+        });
+    }
 };
 exports.AppController = AppController;
 __decorate([
@@ -48,6 +53,12 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "getTotalSupply", null);
+__decorate([
+    (0, common_1.Get)('contract-info'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getContractInfo", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [pixel_asset_service_1.PixelAssetService])
