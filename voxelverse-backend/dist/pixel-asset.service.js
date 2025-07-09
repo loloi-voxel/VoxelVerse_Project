@@ -5,9 +5,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -18,37 +15,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
+exports.PixelAssetService = void 0;
 const common_1 = require("@nestjs/common");
-const pixel_asset_service_1 = require("./pixel-asset.service");
-let AppController = class AppController {
-    constructor(pixelAssetService) {
-        this.pixelAssetService = pixelAssetService;
-    }
-    getHello() {
-        return 'Welcome to VoxelVerse Backend!';
+const ethers_1 = require("ethers");
+let PixelAssetService = class PixelAssetService {
+    constructor() {
+        this.provider = new ethers_1.ethers.JsonRpcProvider('https://polygon-amoy.g.alchemy.com/v2/ToS-yKnpawn1ORRbXbMYB');
+        this.contractAddress = '0x97Ff147bF0BfCA0B3d2EA1BB3A28c56fF53A95c5'; // Remplace par ton adresse
+        this.abi = [
+            'function totalSupply() view returns (uint256)',
+        ]; // ABI simplifiée, à compléter
+        this.contract = new ethers_1.ethers.Contract(this.contractAddress, this.abi, this.provider);
     }
     getTotalSupply() {
         return __awaiter(this, void 0, void 0, function* () {
-            const supply = yield this.pixelAssetService.getTotalSupply();
-            return `Total supply: ${supply}`;
+            const supply = yield this.contract.totalSupply();
+            return Number(supply);
         });
     }
 };
-exports.AppController = AppController;
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-__decorate([
-    (0, common_1.Get)('total-supply'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], AppController.prototype, "getTotalSupply", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [pixel_asset_service_1.PixelAssetService])
-], AppController);
+exports.PixelAssetService = PixelAssetService;
+exports.PixelAssetService = PixelAssetService = __decorate([
+    (0, common_1.Injectable)()
+], PixelAssetService);
