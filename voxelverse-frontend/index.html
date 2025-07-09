@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><title>VoxelVerse</title>
+<head>
+  <title>VoxelVerse</title>
   <style>
     body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
     h1 { color: #4CAF50; }
+    #message { font-size: 1.2em; color: #333; }
   </style>
 </head>
 <body>
   <h1>Welcome to VoxelVerse</h1>
+  <div id="message">Loading...</div>
   <script>
-    console.log("VoxelVerse loaded!");
+    fetch('http://localhost:3000')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('message').textContent = data;
+      })
+      .catch(error => {
+        document.getElementById('message').textContent = 'Error: ' + error.message;
+      });
   </script>
 </body>
 </html>
